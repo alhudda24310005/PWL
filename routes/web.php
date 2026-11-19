@@ -1,20 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LevelController;
+use App\Http\Controllers\KategoriController;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     return 'Selamat Datang';
 });
+
 Route::get('/hello', function () {
-return 'percobaan';
+    return 'percobaan';
 });
 
 Route::get('/hello', function () {
-return 'Hello World';
+    return 'Hello World';
 });
 
 Route::get('/world', function () {
-return 'World';
+    return 'World';
 });
 
 // Route::get('/about', function () {
@@ -53,7 +57,6 @@ Route::get('/ke-about', function () {
     return redirect()->route('about');
 });
 
-
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
         return 'Dashboard Admin';
@@ -64,6 +67,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
     })->name('users');
 });
 
+Route::get('/kategori/sql', function () {
+    return DB::table('m_barang')
+        ->orderBy('harga_jual', 'desc')
+        ->limit(5)
+        ->toRawSql();
+});
+
 Route::fallback(function () {
     return 'Halaman tidak ditemukan';
 });
+
+// Praktikum 4 - DB Facade
+Route::get('/level', [LevelController::class, 'index']);
+
+Route::get('/kategori', [KategoriController::class, 'index']);
