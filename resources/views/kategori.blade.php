@@ -1,12 +1,19 @@
+
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
     <title>Data Kategori</title>
 </head>
 <body>
-    <h1>Data Kategori</h1>
+    <h3>Data Kategori</h3>
 
-    <table border="1" cellpadding="4" cellspacing="0">
+    @if (session('success'))
+        <p>{{ session('success') }}</p>
+    @endif
+
+    <a href="/kategori/create">Tambah Kategori</a>
+
+    <table border="1" cellpadding="8" cellspacing="0">
         <tr>
             <th>ID</th>
             <th>Kode Kategori</th>
